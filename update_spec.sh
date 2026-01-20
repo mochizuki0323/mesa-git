@@ -36,6 +36,5 @@ if ! grep -q "BuildRequires:  clang" $SPEC_FILE; then
     sed -i '/BuildRequires:  meson/a BuildRequires:  clang\nBuildRequires:  lld\nBuildRequires:  llvm-devel' $SPEC_FILE
 fi
 
-sed -i 's/Release:        \(.*\)/Release:        \1.clang.lto.allcodecs/g' $SPEC_FILE
 
 echo "Success！"
