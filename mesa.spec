@@ -96,6 +96,9 @@ Source1:        Mesa-MLAA-License-Clarification-Email.txt
 #Patch1:         001-disable-proc_macro2-unstable-features.patch
 
 BuildRequires:  meson >= 1.3.0
+BuildRequires:  clang
+BuildRequires:  lld
+BuildRequires:  llvm-devel
 BuildRequires:  cbindgen
 BuildRequires:  gcc
 BuildRequires:  gcc-c++
