@@ -25,7 +25,7 @@ export NM=llvm-nm \
 export RANLIB=llvm-ranlib \
 export CFLAGS="-O3 -flto=thin -pipe" \
 export CXXFLAGS="-O3 -flto=thin -pipe" \
-export LDFLAGS="-flto=thin -fuse-ld=lld"' $SPEC_FILE
+export LDFLAGS="-flto=thin -fuse-ld=lld -Wl,--threads=1"' $SPEC_FILE
 fi
 
 if ! grep -q "\--optimization=3" $SPEC_FILE; then
