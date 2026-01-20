@@ -78,7 +78,7 @@
 Name:           %{package_name}
 Summary:        Mesa 3D Graphics Library, git version
 Version:        %{version_string}
-Release:        0.3%{?gitrel}%{?dist}.clang.lto.allcodecs
+Release:        0.3%{?gitrel}%{?dist}
 
 License:        MIT
 URL:            http://www.mesa3d.org
