@@ -1,5 +1,10 @@
 #!/bin/bash
 
+PKG_DIR="mesa"
+
+mkdir -p "$PKG_DIR"
+cd "$PKG_DIR"
+
 UPSTREAM_URL="https://raw.githubusercontent.com/vulturm/linux-graphics/master/fedora/mesa-git"
 curl -O $UPSTREAM_URL/mesa.spec
 curl -O $UPSTREAM_URL/Mesa-MLAA-License-Clarification-Email.txt
