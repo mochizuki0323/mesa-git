@@ -1,0 +1,31 @@
+name: Sync and Patch Mesa
+
+on:
+  schedule:
+    - cron: '0 */1 * * *'
+  workflow_dispatch: 
+
+permissions:
+  contents: write
+
+jobs:
+  update-spec:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run update script
+        run: bash update_spec.sh
+
+      - name: Commit and Push changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          if [ -n "$(git status --porcelain)" ]; then
+            git add mesa.spec
+            git commit -m "Update mesa.spec: $(date +%Y-%m-%d)"
+            git push
+          else
+            echo "No changes detected"
+          fi
