@@ -32,7 +32,7 @@ fi
 
 sed -i 's/.*-Dvideo-codecs=.*/  -Dvideo-codecs=all \\/g' $SPEC_FILE
 
-if ! grep -q "BuildRequires:  clang" $SPEC_FILE; then
+if ! grep -qw "BuildRequires:  clang" $SPEC_FILE; then
     sed -i '/BuildRequires:  meson/a BuildRequires:  clang\nBuildRequires:  lld\nBuildRequires:  llvm-devel' $SPEC_FILE
 fi
 
