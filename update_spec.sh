@@ -2,6 +2,7 @@
 
 UPSTREAM_URL="https://raw.githubusercontent.com/vulturm/linux-graphics/master/fedora/mesa-git"
 curl -O $UPSTREAM_URL/mesa.spec
+curl -O $UPSTREAM_URL/Mesa-MLAA-License-Clarification-Email.txt
 
 SPEC_FILE="mesa.spec"
 
