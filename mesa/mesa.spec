@@ -321,7 +321,7 @@ export NM=llvm-nm
 export RANLIB=llvm-ranlib 
 export CFLAGS="-O3 -flto=thin -pipe" 
 export CXXFLAGS="-O3 -flto=thin -pipe" 
-export LDFLAGS="-flto=thin -fuse-ld=lld -Wl,--threads=1"
+export LDFLAGS="-flto=thin -fuse-ld=lld"
 # ensure standard Rust compiler flags are set
 export RUSTFLAGS="%build_rustflags"
 
