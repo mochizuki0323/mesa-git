@@ -96,9 +96,6 @@ Source1:        Mesa-MLAA-License-Clarification-Email.txt
 #Patch1:         001-disable-proc_macro2-unstable-features.patch
 
 BuildRequires:  meson >= 1.3.0
-BuildRequires:  clang
-BuildRequires:  lld
-BuildRequires:  llvm-devel
 BuildRequires:  cbindgen
 BuildRequires:  gcc
 BuildRequires:  gcc-c++
@@ -314,14 +311,6 @@ The drivers with support for the Vulkan API.
 cp %{SOURCE1} docs/
 
 %build
-export CC=clang 
-export CXX=clang++ 
-export AR=llvm-ar 
-export NM=llvm-nm 
-export RANLIB=llvm-ranlib 
-export CFLAGS="-O3 -flto=thin -pipe" 
-export CXXFLAGS="-O3 -flto=thin -pipe" 
-export LDFLAGS="-flto=thin -fuse-ld=lld"
 # ensure standard Rust compiler flags are set
 export RUSTFLAGS="%build_rustflags"
 
@@ -357,12 +346,9 @@ export MESON_PACKAGE_CACHE_DIR="%{cargo_registry}/"
 # We've gotten a report that enabling LTO for mesa breaks some games. See
 # https://bugzilla.redhat.com/show_bug.cgi?id=1862771 for details.
 # Disable LTO for now
-# %define _lto_cflags %{nil}
+%define _lto_cflags %{nil}
 
 %meson \
-  --optimization=3 \
-  -Db_lto=true \
-  -Db_lto_mode=thin \
   -Dplatforms=x11,wayland \
 %if 0%{?with_hardware}
   -Dgallium-drivers=llvmpipe,softpipe,virgl,nouveau%{?with_r300:,r300}%{?with_crocus:,crocus}%{?with_i915:,i915}%{?with_iris:,iris}%{?with_vmware:,svga}%{?with_radeonsi:,radeonsi}%{?with_r600:,r600}%{?with_freedreno:,freedreno}%{?with_etnaviv:,etnaviv}%{?with_tegra:,tegra}%{?with_vc4:,vc4}%{?with_v3d:,v3d}%{?with_lima:,lima}%{?with_panfrost:,panfrost}%{?with_vulkan_hw:,zink} \
