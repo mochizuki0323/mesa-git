@@ -314,6 +314,17 @@ The drivers with support for the Vulkan API.
 cp %{SOURCE1} docs/
 
 %build
+# Dynamically fix missing opencl-c-base.h for Clang multilib builds
+CLANG_RESOURCE_DIR=$(clang -print-resource-dir 2>/dev/null || echo "")
+if [ -n "$CLANG_RESOURCE_DIR" ]; then
+    OPENCL_HEADER=$(find %{_libdir} -type f -name opencl-c-base.h 2>/dev/null | head -n1)
+    if [ -n "$OPENCL_HEADER" ]; then
+        mkdir -p "${CLANG_RESOURCE_DIR}/include"
+        ln -sf "$OPENCL_HEADER" "${CLANG_RESOURCE_DIR}/include/opencl-c-base.h"
+        echo "Fixed opencl-c-base.h by linking $OPENCL_HEADER"
+    fi
+fi
+
 export CC=clang 
 export CXX=clang++ 
 export AR=llvm-ar 
